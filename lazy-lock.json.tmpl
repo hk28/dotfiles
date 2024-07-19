@@ -1,3 +1,5 @@
 {{- if eq .chezmoi.hostname "hk-work-vm" -}}
 {{-   include "dot_config/nvim/lazy-lock.json_hk-work-vm" -}}
+{{- else if eq .chezmoi.hostname "tinker" -}}
+{{-   include "dot_config/nvim/lazy-lock.json_tinker" -}}
 {{- end -}}
