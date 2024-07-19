@@ -10,7 +10,16 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 exec i3 --shmlog-size=26214400
 #exec i3-msg 'debuglog on; shmlog on; reload'
+##
+{{- if eq .chezmoi.hostname "hk-work-vm" -}}
+#
 set $mod Mod4
+#
+{{- else -}}
+#
+set $mod Mod1
+#
+{{- end -}}
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
