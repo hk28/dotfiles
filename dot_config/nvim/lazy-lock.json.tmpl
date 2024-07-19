@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.hostname "hk-work-vm" -}}
+{{-   include "lazy-lock.json_hk-work-vm" -}}
+{{- else if eq .chezmoi.hostname "tinker" -}}
+{{-   include "lazy-lock.json_tinker" -}}
+{{- end -}}
