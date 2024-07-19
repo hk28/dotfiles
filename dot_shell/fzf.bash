@@ -1,7 +1,7 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */home/hk28/.fzf/bin* ]]; then
-	PATH="${PATH:+${PATH}:}/home/hk28/.fzf/bin"
+if [[ ! "$PATH" == *~/.fzf/bin* ]]; then
+	PATH="${PATH:+${PATH}:}~/.fzf/bin"
 fi
 
 # catppuccin
