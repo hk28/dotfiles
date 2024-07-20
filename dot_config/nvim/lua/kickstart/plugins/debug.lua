@@ -86,6 +86,7 @@ return {
 
     -- Install golang specific config
     require('dap-go').setup {
+      -- require('dap').set_log_level 'TRACE',
       delve = {
         -- On Windows delve must be run attached or it crashes.
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring

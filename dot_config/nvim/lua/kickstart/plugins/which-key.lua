@@ -16,25 +16,21 @@
 return {
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
-    version = '2.1.0',
+    -- version = '2.1.0',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
-
-      -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+      local wk = require 'which-key'
+      wk.add { --register { -- add for 3.x
+        { '<leader>u', group = 'ui' },
+        { '<leader>b', group = 'buffer' },
+        { '<leader>c', group = 'code' },
+        { '<leader>g', group = 'git' },
+        { '<leader>h', group = 'git hunk' },
+        { '<leader>d', group = 'diag/quickfix' },
+        { '<leader>t', group = 'terminal' },
+        { '<leader>ut', '<cmd>TransparentToggle<cr>', desc = 'Toggle transparent bg', mode = 'n' },
       }
-      -- visual mode
-      require('which-key').register({
-        ['<leader>h'] = { 'Git [H]unk' },
-      }, { mode = 'v' })
     end,
   },
 }
