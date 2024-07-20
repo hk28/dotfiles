@@ -2,4 +2,6 @@
 {{-   include "lazy-lock.json_hk-work-vm" -}}
 {{- else if eq .chezmoi.hostname "tinker" -}}
 {{-   include "lazy-lock.json_tinker" -}}
+{{- else if eq .chezmoi.hostname "penguin" -}}
+{{-   include "lazy-lock.json_penguin" -}}
 {{- end -}}
