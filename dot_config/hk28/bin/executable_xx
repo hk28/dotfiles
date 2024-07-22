@@ -1,0 +1,11 @@
+#!/bin/env bash
+# Go to the Scala native debug output directory and list all executable files.
+# That should be the unit test files.
+cd ~/Scala/_generated.files/build/ccore.native.debug/Tests/
+result=$( fx | fzf )
+if [[ -z $result ]]; then
+  exit 0
+fi
+pushd $(dirname $result) > /dev/null
+./$(basename $result)
+
