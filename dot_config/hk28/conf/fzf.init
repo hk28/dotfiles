@@ -28,15 +28,33 @@ edf() {
 }
 
 # Man without options will use fzf to select a page
-function man() {
-	MAN="/usr/bin/man"
-	if [ -n "$1" ]; then
-		$MAN "$@"
-		return $?
-	else
-		$MAN -k . | fzf --reverse --preview="echo {1,2} | sed 's/ (/./' | sed -E 's/\)\s*$//' | xargs $MAN" | awk '{print $1 "." $2}' | tr -d '()' | xargs -r $MAN
-		return $?
-	fi
+# function man() {
+# 	MAN="/usr/bin/man"
+# 	if [ -n "$1" ]; then
+# 		$MAN "$@"
+# 		return $?
+# 	else
+# 		$MAN -k . | fzf --reverse --preview="echo {1,2} | sed 's/ (/./' | sed -E 's/\)\s*$//' | xargs $MAN" | awk '{print $1 "." $2}' | tr -d '()' | xargs -r $MAN
+# 		return $?
+# 	fi
+# }
+
+function fman() {
+    man -k . |
+	    fzf -q "$1" --prompt='man> ' --reverse --preview $'echo {} | tr -d \'()\' | awk \'{printf "%s ", $2} {print $1}\' | xargs -r man | col -bx | bat -l man -p --color always' |
+	    tr -d '()' |
+	    awk '{printf "%s ", $2} {print $1}' |
+	    xargs -r man
+}
+# Get the colors in the opened man page itself
+export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
+
+
+# Go to the scala directory and show all changed git files
+# F1 starts meld as diff viewer
+function fdiff() {
+(cd ~/Scala; git diff $@ --name-only | fzf --bind 'f1:execute(meld {})' --header 'Press F1 for visual diff' -m --ansi --height=50% --preview "git diff $@ --color=always -- {-1}")
+
 }
 
 eval "$(fzf --bash)"
